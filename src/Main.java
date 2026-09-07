@@ -4,6 +4,7 @@ public class Main {
     static void main(String[] args) {
         FuncoesRecrusao recursao = new FuncoesRecrusao();
         PesquisaBinaria pesquisaBinaria = new PesquisaBinaria();
+        HashMapExercicio hash = new HashMapExercicio();
 
         int[] numeros = {1, 5, 4, 10};
         int[] binaria = {1, 2, 3, 4, 5, 6, 7, 8, 9};
@@ -15,5 +16,7 @@ public class Main {
         System.out.println("indice : " + pesquisaBinaria.exercicioBuscaBinaria(binaria, 5, 0, binaria.length-1));
 
         recursao.exercicioContar(10);
+
+        System.out.println(hash.cauntString("dog"));
     }
 }
