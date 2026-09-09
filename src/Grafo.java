@@ -20,18 +20,25 @@ public class Grafo {
         var compradorDeAbacaxiEncontrado = false;
 
         while(!compradorDeAbacaxiEncontrado) {
+            //SE EXISTEM AMIGOS EM COMUM, NÃO QUEREMOS PERGUNTAR A MESMA PESSOA 2 VEZES, NÃO É MESMO?
+            //PORQUE PODERIAMOS ENTRA EM ‘LOOP’ INFINITO IURY DÁ O NOME DE PHILIPE, PHILIPE DA O NOME DE IURY.
+            List<String> amigosVerificados = new ArrayList<>();
             //PESQUISA EM LARGA ESCALA, PROCURAR NO MAIS PRÓXIMO
             var amigo = fila.poll();
-            compradorDeAbacaxiEncontrado = amigo.contains("1");
-            //SE ENCONTRAR O COMPRADOR, MOSTRAR QUEM É, E SAI.
-            if (compradorDeAbacaxiEncontrado){
-                System.out.println(amigo);
-                break;
-            } else if (redeDeAmigos.get(amigo)!=null && !redeDeAmigos.get(amigo).isEmpty()) { // SE AMIGO TIVER REDE, PEGAR REDE DO AMIGO.
-                fila.addAll(redeDeAmigos.get(amigo));
-            } else if (fila.isEmpty()) {
-                System.out.println("Não existem comprador de abacaxi na rede de amigos!");
-                break;
+            if (!amigosVerificados.contains(amigo)) {
+                amigosVerificados.add(amigo);
+                compradorDeAbacaxiEncontrado = amigo.contains("1");
+                //SE ENCONTRAR O COMPRADOR, MOSTRAR QUEM É, E SAI.
+                if (compradorDeAbacaxiEncontrado) {
+                    System.out.println(amigo);
+                    break;
+
+                } else if (redeDeAmigos.get(amigo) != null && !redeDeAmigos.get(amigo).isEmpty()) { // SE AMIGO TIVER REDE, PEGAR REDE DO AMIGO.
+                    fila.addAll(redeDeAmigos.get(amigo));
+                } else if (fila.isEmpty()) {
+                    System.out.println("Não existem comprador de abacaxi na rede de amigos!");
+                    break;
+                }
             }
         }
     }
@@ -41,9 +48,9 @@ public class Grafo {
         //Grau 1
         redeDeAmigos.put("Axel", List.of("Philipe", "Iury"));
         //Grau 2
-        redeDeAmigos.put("Philipe", List.of("Mick", "Marolu"));
+        redeDeAmigos.put("Philipe", List.of("Mick", "Marolu", "Iury"));
         //Grau 2
-        redeDeAmigos.put("Iury", List.of("Leticia", "Lindin"));
+        redeDeAmigos.put("Iury", List.of("Leticia", "Lindin", "Philipe"));
         //Grau 3
         redeDeAmigos.put("Mick", List.of("Faning1", "Pitoco"));
     }
