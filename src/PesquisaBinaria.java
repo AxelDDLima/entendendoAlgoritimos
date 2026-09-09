@@ -3,7 +3,7 @@ public class PesquisaBinaria {
      * busca um numero dentro do array
      *
      * @param numeros
-     * @param procurado
+     * @param procurando
      * @param baixo
      * @param alto
      * @return soma
