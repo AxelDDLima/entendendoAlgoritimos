@@ -18,11 +18,11 @@ public class Grafo {
         Queue<String> fila = new LinkedList<>(redeDeAmigos.get(eu));
         //O COMPRADOR AINDA NÃO FOI ENCONTRADO - :/ :\ :| :(
         var compradorDeAbacaxiEncontrado = false;
+        //SE EXISTEM AMIGOS EM COMUM, NÃO QUEREMOS PERGUNTAR A MESMA PESSOA 2 VEZES, NÃO É MESMO?
+        //PORQUE PODERIAMOS ENTRA EM ‘LOOP’ INFINITO IURY DÁ O NOME DE PHILIPE, PHILIPE DA O NOME DE IURY.
+        Set<String> amigosVerificados = new HashSet<>(); // O(1)
 
         while(!compradorDeAbacaxiEncontrado) {
-            //SE EXISTEM AMIGOS EM COMUM, NÃO QUEREMOS PERGUNTAR A MESMA PESSOA 2 VEZES, NÃO É MESMO?
-            //PORQUE PODERIAMOS ENTRA EM ‘LOOP’ INFINITO IURY DÁ O NOME DE PHILIPE, PHILIPE DA O NOME DE IURY.
-            List<String> amigosVerificados = new ArrayList<>();
             //PESQUISA EM LARGA ESCALA, PROCURAR NO MAIS PRÓXIMO
             var amigo = fila.poll();
             if (!amigosVerificados.contains(amigo)) {
@@ -32,7 +32,6 @@ public class Grafo {
                 if (compradorDeAbacaxiEncontrado) {
                     System.out.println(amigo);
                     break;
-
                 } else if (redeDeAmigos.get(amigo) != null && !redeDeAmigos.get(amigo).isEmpty()) { // SE AMIGO TIVER REDE, PEGAR REDE DO AMIGO.
                     fila.addAll(redeDeAmigos.get(amigo));
                 } else if (fila.isEmpty()) {
